@@ -8,7 +8,5 @@ namespace SharkWallet_2._0.entidades
         public int BalanceID { get; set; }
 
         public double Cantidad { get; set; }
-
-        public double Valor { get; set; }
     }
 }
