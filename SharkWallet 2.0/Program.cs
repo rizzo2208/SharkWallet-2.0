@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SharkWallet_2._0.DBcontext;
+using SharkWallet_2._0.UOWork;
 
 var builder = WebApplication.CreateBuilder(args);
 
