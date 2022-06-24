@@ -10,7 +10,7 @@ namespace SharkWallet_2._0.entidades
 
         public string UsuarioNombre { get; set; }
 
-        [ForeignKey ("Billetera")]
+        [ForeignKey("Billetera")]
         public Billetera? billetera { get; set; }
     }
 }

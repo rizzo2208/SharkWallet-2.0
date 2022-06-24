@@ -2,7 +2,7 @@
 
 namespace SharkWallet_2._0.Genericos
 {
-    public class GenericosRepositorio<T> : IGenericosRepositorio<T> where T : class 
+    public class GenericosRepositorio<T> : IGenericosRepositorio<T> where T : class
     {
 
         protected readonly DBContext _db;

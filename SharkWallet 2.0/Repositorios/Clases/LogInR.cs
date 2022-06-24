@@ -16,7 +16,7 @@ namespace SharkWallet_2._0.Repositorios.Clases
         }
         public bool ExisteUsuario(string email)
         {
-            
+
             return _db.LogIn.Any(a => a.Email == email);
         }
     }
