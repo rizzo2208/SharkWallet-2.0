@@ -9,7 +9,7 @@ namespace SharkWallet_2._0.Repositorios.Clases
     {
         public BalanceR(DBContext db) : base(db)
         {
-               
+
         }
     }
 }

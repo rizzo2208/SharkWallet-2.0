@@ -12,8 +12,8 @@ using SharkWallet_2._0.DBcontext;
 namespace SharkWallet_2._0.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20220624032629_sw201")]
-    partial class sw201
+    [Migration("20220624195459_migracion-1")]
+    partial class migracion1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,9 +35,6 @@ namespace SharkWallet_2._0.Migrations
                     b.Property<double>("Cantidad")
                         .HasColumnType("float");
 
-                    b.Property<double>("Valor")
-                        .HasColumnType("float");
-
                     b.HasKey("BalanceID");
 
                     b.ToTable("Balances");
@@ -54,6 +51,36 @@ namespace SharkWallet_2._0.Migrations
                     b.HasKey("BilleteraID");
 
                     b.ToTable("Billetera");
+                });
+
+            modelBuilder.Entity("SharkWallet_2._0.Entidades.LogIn", b =>
+                {
+                    b.Property<int>("LogInID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LogInID"), 1L, 1);
+
+                    b.Property<string>("Contraseña")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("PasswordHash")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<int?>("Usuario")
+                        .HasColumnType("int");
+
+                    b.HasKey("LogInID");
+
+                    b.HasIndex("Usuario");
+
+                    b.ToTable("LogIn");
                 });
 
             modelBuilder.Entity("SharkWallet_2._0.entidades.Monedas", b =>
@@ -93,11 +120,24 @@ namespace SharkWallet_2._0.Migrations
                     b.Property<int?>("Billetera")
                         .HasColumnType("int");
 
+                    b.Property<string>("UsuarioNombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("UsuarioID");
 
                     b.HasIndex("Billetera");
 
                     b.ToTable("Usuario");
+                });
+
+            modelBuilder.Entity("SharkWallet_2._0.Entidades.LogIn", b =>
+                {
+                    b.HasOne("SharkWallet_2._0.entidades.Usuario", "usuario")
+                        .WithMany()
+                        .HasForeignKey("Usuario");
+
+                    b.Navigation("usuario");
                 });
 
             modelBuilder.Entity("SharkWallet_2._0.entidades.Monedas", b =>

@@ -1,23 +1,17 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
-using CoinGecko.Clients;
+using SharkWallet_2._0.Autenticacion.request;
+using SharkWallet_2._0.Autenticacion.response;
+using SharkWallet_2._0.Entidades;
+using SharkWallet_2._0.UOWork;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using SharkWallet_2._0.UOWork;
-using SharkWallet_2._0.Autenticacion.response;
-using SharkWallet_2._0.Autenticacion.request;
-using SharkWallet_2._0.Entidades;
-using SharkWallet_2._0.entidades;
 
 namespace SharkWallet_2._0.Servicios
 {
-    public class UserServices
+    public class UserServices : IUserServices
     {
 
         private readonly IUOWork _uOW;
@@ -29,13 +23,13 @@ namespace SharkWallet_2._0.Servicios
         }
 
         #region UserResponseRegistrar
-        public UserResponse Registrar(UserRequest Email, string Contraseña, LogIn logIn)
+        public UserResponse Registrar(UserRequest User, string Contraseña)
         {
             byte[] passwordHash;
             byte[] passwordSalt;
             CrearPassHash(Contraseña, out passwordHash, out passwordSalt);
             LogIn logeo = new LogIn();
-            logeo.Email = logIn.Email;
+            logeo.Email = User.Email;
             logeo.PasswordHash = passwordHash;
             logeo.PasswordSalt = passwordSalt;
             _uOW.LogInRepo.Insert(logeo);
@@ -97,7 +91,6 @@ namespace SharkWallet_2._0.Servicios
             {
                 new Claim(JwtRegisteredClaimNames.Email, usuario.Email),
                 new Claim(JwtRegisteredClaimNames.NameId, usuario.UsuarioID.ToString()),
-                
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);

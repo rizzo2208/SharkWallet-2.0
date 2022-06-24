@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace SharkWallet_2._0.Migrations
 {
-    public partial class sw201 : Migration
+    public partial class migracion1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,8 +15,7 @@ namespace SharkWallet_2._0.Migrations
                 {
                     BalanceID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Cantidad = table.Column<double>(type: "float", nullable: false),
-                    Valor = table.Column<double>(type: "float", nullable: false)
+                    Cantidad = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -65,6 +65,7 @@ namespace SharkWallet_2._0.Migrations
                 {
                     UsuarioID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    UsuarioNombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Billetera = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -76,6 +77,33 @@ namespace SharkWallet_2._0.Migrations
                         principalTable: "Billetera",
                         principalColumn: "BilleteraID");
                 });
+
+            migrationBuilder.CreateTable(
+                name: "LogIn",
+                columns: table => new
+                {
+                    LogInID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Contraseña = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PasswordHash = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    PasswordSalt = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    Usuario = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LogIn", x => x.LogInID);
+                    table.ForeignKey(
+                        name: "FK_LogIn_Usuario_Usuario",
+                        column: x => x.Usuario,
+                        principalTable: "Usuario",
+                        principalColumn: "UsuarioID");
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LogIn_Usuario",
+                table: "LogIn",
+                column: "Usuario");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Monedas_Balance",
@@ -95,6 +123,9 @@ namespace SharkWallet_2._0.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "LogIn");
+
             migrationBuilder.DropTable(
                 name: "Monedas");
 
