@@ -9,15 +9,15 @@ namespace SharkWallet_2._0.Entidades
         [Key]
         public int LogInID { get; set; }
 
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
-        public string Contraseña { get; set; }
+        public string? Contraseña { get; set; }
 
-        public byte[] PasswordHash { get; set; }
-        public byte[] PasswordSalt { get; set; }
+        public byte[]? PasswordHash { get; set; }
+        public byte[]? PasswordSalt { get; set; }
 
         [ForeignKey("Usuario")]
-        public Usuario usuario { get; set; }
+        public Usuario? usuario { get; set; }
 
     }
 }
