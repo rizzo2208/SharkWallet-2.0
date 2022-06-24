@@ -11,7 +11,7 @@ using System.Text;
 
 namespace SharkWallet_2._0.Servicios
 {
-    public class UserServices
+    public class UserServices : IUserServices
     {
 
         private readonly IUOWork _uOW;
@@ -23,13 +23,13 @@ namespace SharkWallet_2._0.Servicios
         }
 
         #region UserResponseRegistrar
-        public UserResponse Registrar(UserRequest Email, string Contraseña, LogIn logIn)
+        public UserResponse Registrar(UserRequest User, string Contraseña)
         {
             byte[] passwordHash;
             byte[] passwordSalt;
             CrearPassHash(Contraseña, out passwordHash, out passwordSalt);
             LogIn logeo = new LogIn();
-            logeo.Email = logIn.Email;
+            logeo.Email = User.Email;
             logeo.PasswordHash = passwordHash;
             logeo.PasswordSalt = passwordSalt;
             _uOW.LogInRepo.Insert(logeo);
@@ -91,7 +91,6 @@ namespace SharkWallet_2._0.Servicios
             {
                 new Claim(JwtRegisteredClaimNames.Email, usuario.Email),
                 new Claim(JwtRegisteredClaimNames.NameId, usuario.UsuarioID.ToString()),
-
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);

@@ -12,8 +12,6 @@ namespace SharkWallet_2._0.Controladores
     {
         private readonly IUserServices _usuarioService;
         private readonly IUOWork _uow;
-
-
         public LogInController(IUserServices usuarioService, IUOWork uow)
         {
             _usuarioService = usuarioService;
