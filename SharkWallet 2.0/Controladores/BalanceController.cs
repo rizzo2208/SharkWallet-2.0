@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SharkWallet_2._0.entidades;
 using SharkWallet_2._0.UOWork;
+using System.Net;
 
 namespace SharkWallet_2._0.Controladores
 {
@@ -10,6 +11,7 @@ namespace SharkWallet_2._0.Controladores
 
     public class BalanceController : ControllerBase
     {
+        
         private readonly IUOWork _context;
 
         public BalanceController(IUOWork context)
