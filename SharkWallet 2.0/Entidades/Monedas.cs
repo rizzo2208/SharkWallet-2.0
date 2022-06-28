@@ -9,7 +9,7 @@ namespace SharkWallet_2._0.entidades
         public int MonedasID { get; set; }
 
         public string? MonedasNombre { get; set; }
-       
+
         [ForeignKey("Balance")]
         public Balance? balance { get; set; }
     }

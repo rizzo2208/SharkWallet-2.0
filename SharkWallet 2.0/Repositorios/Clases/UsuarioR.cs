@@ -9,6 +9,7 @@ namespace SharkWallet_2._0.Repositorios.Clases
     {
         public UsuarioR(DBContext db) : base(db)
         {
+
         }
     }
 }

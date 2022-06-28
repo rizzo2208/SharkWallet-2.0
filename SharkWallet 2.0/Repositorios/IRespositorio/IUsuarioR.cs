@@ -5,5 +5,6 @@ namespace SharkWallet_2._0.Repositorios.IRespositorio
 {
     public interface IUsuarioR : IGenericosRepositorio<Usuario>
     {
+
     }
 }
