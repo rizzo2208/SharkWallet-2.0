@@ -101,6 +101,16 @@ namespace SharkWallet_2._0.Controladores
             }
             return Ok();
         }
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        private IActionResult View()
+        {
+            throw new NotImplementedException();
+        }
+        
     }
 }
 

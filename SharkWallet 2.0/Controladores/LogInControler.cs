@@ -34,6 +34,7 @@ namespace SharkWallet_2._0.Controladores
                 usuario = response
             });
         }
+
         [HttpPost("Registro")]
         public ActionResult RegistrarUsuario([FromBody] UserRequest user)
         {
@@ -44,5 +45,6 @@ namespace SharkWallet_2._0.Controladores
             UserResponse res = _usuarioService.Registrar(user, user.Contraseña);
             return Ok(res);
         }
+        
     }
 }
