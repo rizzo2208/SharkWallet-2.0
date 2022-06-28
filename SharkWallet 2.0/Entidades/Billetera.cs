@@ -8,8 +8,11 @@ namespace SharkWallet_2._0.entidades
         [Key]
         public int BilleteraID { get; set; }
 
+        /*[ForeignKey("Monedas")]
+        public IEnumerable<Monedas>? Moneda { get; set; }*/
+
         [ForeignKey("Monedas")]
-        public IEnumerable<Monedas>? Moneda { get; set; }
+        public double Moneda { get; set; }
 
     }
 }
