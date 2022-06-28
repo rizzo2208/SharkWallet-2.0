@@ -30,7 +30,7 @@ namespace SharkWallet_2._0.Controladores
             var token = _usuarioService.GetToken(response);
             return Ok(new
             {
-                token = token,
+                token,
                 usuario = response
             });
         }
