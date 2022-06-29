@@ -33,17 +33,20 @@ namespace SharkWallet_2._0.entidades
                             int LnResETH = resultado.Usd.Length;
                             char[] PrecioETH = new char[LnResETH];
                             PrecioETH = resultado.Usd.ToCharArray();
-
                             int papa = PrecioETH.Length;
-                            int[] valornum = new int[19+(papa-5)];
+                            string[] valornum = new string[19+(papa-5)];
+                            string valorpalabra=null;
                             int valornu=0;
-
                             for (int i = 19; i < (papa-5); i++)
                             {
-                                valornum[i] = Convert.ToInt32(Char.GetNumericValue(PrecioETH[i]));
+                                valorpalabra += Convert.ToString(PrecioETH[i]);
+                                //valornum[i] = Convert.ToString(Char.GetNumericValue(PrecioETH[i]));
+                                Console.WriteLine(valornum[i]);
                             }
+                            Console.WriteLine(valorpalabra);
+                            resultado.Usd2 = valorpalabra;
 
-                            if (Int32.TryParse(string.Join("", valornum), out valornu))
+                            /*if (Int32.TryParse(string.Join("", valornum), out valornu))
                             {
                             Console.WriteLine(valornu);                          
                                 resultado.Usd2 = valornu;
@@ -53,7 +56,7 @@ namespace SharkWallet_2._0.entidades
                             {
                                 return resultado;//failed - too many digits in the array
                             }
-                            /*char[] quees = new char[LnResETH];
+                            char[] quees = new char[LnResETH];
                             for (int i = 0; i < LnResETH; i++)
                             {
                                 bool esEspacio = Char.IsSeparator(PrecioETH[i]);

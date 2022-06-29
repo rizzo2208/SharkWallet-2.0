@@ -3,6 +3,6 @@
     public class Ethereum
     {
         public string Usd { get; set; }
-        public int Usd2 { get; set; }
+        public string Usd2 { get; set; }
     }
 }
