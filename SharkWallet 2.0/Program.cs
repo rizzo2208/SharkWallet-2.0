@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SharkWallet_2._0.DBcontext;
+using SharkWallet_2._0.entidades;
 using SharkWallet_2._0.Servicios;
 using SharkWallet_2._0.UOWork;
 
@@ -21,6 +22,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUOWork, UOWork>();
 builder.Services.AddScoped<IUserServices, UserServices>();
+builder.Services.AddScoped<IConsumirApiService, ConsumirApiService>();
 
 
 var app = builder.Build();
